@@ -1,0 +1,78 @@
+{
+  "java.jdt.ls.java.home": "/home/sourander/.sdkman/candidates/java/current",
+  
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-25",
+      "path": "/home/sourander/.sdkman/candidates/java/current",
+      "default": true
+    }
+  ],
+
+// --- Java Language Server Settings ---
+  "java.configuration.detectJdksAtStart": false, // Set to false to force it to use your SDKMAN path above
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.server.launchMode": "Standard",
+  "java.autobuild.enabled": true,
+  "java.maxConcurrentBuilds": 1,
+
+  // --- Code Completion and Analysis ---
+  "java.completion.enabled": true,
+  "java.completion.guessMethodArguments": "auto",
+  "java.completion.favoriteStaticMembers": [
+    "org.junit.jupiter.api.Assertions.*",
+    "org.mockito.Mockito.*"
+  ],
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.sources.organizeImports.staticStarThreshold": 5,
+  "java.sources.organizeImports.starThreshold": 5,
+
+  // --- Code Formatting ---
+  "java.format.enabled": true,
+  "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+  "java.format.settings.profile": "GoogleStyle",
+  "java.format.comments.enabled": true,
+
+  // --- Maven Settings ---
+  "java.import.maven.enabled": true,
+  "maven.executable.path": "mvn",
+  "maven.view": "hierarchical",
+
+  // --- Testing ---
+  "java.test.defaultConfig": "",
+  "java.test.config": {},
+  
+  // --- Debugging ---
+  "java.debug.logLevel": "warn",
+  "java.debug.settings.enableRunDebugCodeLens": true,
+  "java.debug.settings.showHex": false,
+  "java.debug.settings.showStaticVariables": false,
+  "java.debug.settings.showQualifiedNames": false,
+  "java.debug.settings.maxStringLength": 0,
+  "java.debug.settings.exceptionBreakpoint.skipClasses": [
+    "$JDK",
+    "junit.*",
+    "org.junit.*"
+  ],
+  
+  // --- Code Lens ---
+  "java.references.includeAccessors": true,
+  "java.references.includeDecompiledSources": true,
+  "java.referencesCodeLens.enabled": true,
+
+  // --- Error Reporting and Telemetry ---
+  "java.errors.incompleteClasspath.severity": "warning",
+  
+  // --- Performance ---
+  "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m",
+  
+  // --- Code Completion Filtering ---
+  "java.completion.filteredTypes": [
+    "java.awt.*",
+    "com.sun.*",
+    "sun.*",
+    "jdk.*",
+    "org.graalvm.*",
+    "javax.swing.*"
+  ]
+}
