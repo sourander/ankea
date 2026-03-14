@@ -1,0 +1,11 @@
+[project]
+name = "ankea"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "requests>=2.32.5",
+    "zensical>=0.0.27",
+]

@@ -1,0 +1,21 @@
+{
+  "moduleName": "Ankea",
+  "outputDir": "./docs/reference/api",
+  "sourceSets": [
+    {
+      "sourceSetID": {
+        "scopeId": "Ankea",
+        "sourceSetName": "main"
+      },
+      "sourceRoots": [
+        "./src/main/java"
+      ],
+      "analysisPlatform": "jvm"
+    }
+  ],
+  "pluginsClasspath": [
+    "./jars/gfm-plugin-2.1.0.jar",
+    "./jars/dokka-base-2.1.0.jar",
+    "./jars/analysis-kotlin-descriptors-2.1.0.jar"
+  ]
+}

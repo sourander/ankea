@@ -1,0 +1,22 @@
+//[Ankea](../../../index.md)/[fi.jyu.ohj2.sourander.ankea.controller](../index.md)/[MainController](index.md)
+
+# MainController
+
+[JVM]\
+open class [MainController](index.md)
+
+JavaFX controller for the main application view (`main.fxml`). 
+
+Wires the UI controls declared in FXML to the [AnkeaModel](../../fi.jyu.ohj2.sourander.ankea.model/-ankea-model/index.md) and sets up event handlers after the scene graph has been built.
+
+## Constructors
+
+| | |
+|---|---|
+| [MainController](-main-controller.md) | [JVM]<br>constructor() |
+
+## Functions
+
+| Name | Summary |
+|---|---|
+| [initialize](initialize.md) | [JVM]<br>open fun [initialize](initialize.md)(location: [URL](https://docs.oracle.com/javase/8/docs/api/java/net/URL.html), resources: [ResourceBundle](https://docs.oracle.com/javase/8/docs/api/java/util/ResourceBundle.html))<br>Called by the JavaFX runtime after all `@FXML` fields have been injected. |

@@ -12,8 +12,21 @@ During the course, we used IntelliJ IDEA as our IDE. I wanted to try out VS Code
 
 - Java 25
 - Maven
+- Just
 - uv (for running Zensical docs)
+- xq (for XML prettying)
 
-### Installation of prerequisites
+## Docs
 
-This project was developed on Linux. Other OSs have not been tested. To see all commands used to create and setup this project, refer to [History of the Creation of Ankea](SETUP.md). Sadly, the `"${userHome}/.sdkman/candidates/java/current"` did not work, nor did `"${env:JAVA_HOME}"`, so I had to hardcode the path to Java in the VS Code settings to `/home/sourander/.sdkman/candidates/java/current`. Not optimal, but it is what it is.
+You can find the docs for this project in the `docs` folder. They are also published to the GitHub Pages at [sourander.github.io/ankea](https://sourander.github.io/ankea/).
+
+## Use of AI tools
+
+All *production code* is written by me, Jani, manually. Language models have been used to:
+
+* Generate project scaffolding (pom.xml, JavaFX setup, etc.)
+* Help in translations and documentation writing
+* Finding bugs that I cannot solve myself within a reasonable time frame
+* Figure out alternative approaches. I am Python-native. I use LLMs to detect the *Pythonic* style in my Java code and suggest Java-idiomatic alternatives.
+
+Reason for translating everything to English is that I'm accustomed to writing code and documentation in English. Finnish variable names feel absolutely heretical to me.

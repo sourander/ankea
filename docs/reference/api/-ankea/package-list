@@ -1,0 +1,23 @@
+$dokka.format:gfm-v1
+$dokka.linkExtension:md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.controller////PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.controller/index.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.controller/MainController///PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.controller/-main-controller/index.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.controller/MainController/MainController/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.controller/-main-controller/-main-controller.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.controller/MainController/initialize/#java.net.URL#java.util.ResourceBundle/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.controller/-main-controller/initialize.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.model////PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/index.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.model/AnkeaModel///PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-ankea-model/index.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.model/AnkeaModel/AnkeaModel/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-ankea-model/-ankea-model.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.model/AnkeaModel/generateResponse/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-ankea-model/generate-response.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea////PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea/index.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea/App///PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea/-app/index.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea/App/App/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea/-app/-app.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea/App/main/#java.lang.String[]/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea/-app/main.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea/App/start/#Stage/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea/-app/start.md
+$dokka.location:fi.jyu.ohj2.sourander////PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander/index.md
+$dokka.location:fi.jyu.ohj2.sourander/App///PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander/-app/index.md
+$dokka.location:fi.jyu.ohj2.sourander/App/App/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander/-app/-app.md
+$dokka.location:fi.jyu.ohj2.sourander/App/main/#java.lang.String[]/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander/-app/main.md
+fi.jyu.ohj2.sourander
+fi.jyu.ohj2.sourander.ankea
+fi.jyu.ohj2.sourander.ankea.controller
+fi.jyu.ohj2.sourander.ankea.model
