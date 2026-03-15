@@ -143,6 +143,10 @@ stateDiagram-v2
     class StatsTab extension
 ```
 
+!!! warning "Why are some boxes orange?"
+
+    The orange boxes represent the extension requirements. They are likely not going to be imlemented unless I find extra time.
+
 ### Workflow Model - Level 2
 
 The `View statictics` has been omitted from this Level 2 diagram. I don't believe I will have to implement it.
@@ -193,8 +197,8 @@ stateDiagram-v2
 
 ```mermaid
 flowchart TD
-    DeckManager -- have --> Deck
-    Deck -- have --> Flashcard
+    DeckManager -- contains --> Deck
+    Deck -- contain --> Flashcard
 ```
 
 ### Data Model - Level 2
@@ -205,7 +209,7 @@ flowchart TD
 
     DeckManager[Deck Manager]
     
-    DeckManager -- manages --> Decks[Decks]
+    DeckManager -- contain --> Decks[Decks]
     
     Decks -- have --> DeckDetails[Deck Details]
     Decks -- track --> DeckStats[Practice Counts]:::extension
@@ -216,11 +220,10 @@ flowchart TD
     Flashcards -- have --> CardContent[Front & Back]
     Flashcards -- track --> CardStats[View Counts]:::extension
     
-    Sessions -- have --> PracMode[Practice Mode Data]:::extension
-    Sessions -- have --> ExamMode[Exam Mode Data]:::extension
+    Sessions -- have --> PracMode[Practice Mode Session]:::extension
+    Sessions -- have --> ExamMode[Exam Mode Session]:::extension
     
-    ExamMode -- generate --> Choices[Multiple Choice Options]:::extension
-    ExamMode -- result in --> Feedback[Answer Feedback]:::extension
+    Flashcards -- have --> Choices[Multiple Choice Options]:::extension
 ```
 
 ## User Interface Design
