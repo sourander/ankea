@@ -30,6 +30,8 @@ mvn archetype:generate \
 cd ankea
 ```
 
+One could also utilize the interactive mode, like guided in tutorialspoints [Maven - Project Templates](https://www.tutorialspoint.com/maven/maven_project_templates.htm).
+
 ## POM settings
 
 For VS Code, install the [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) by Microsoft.
