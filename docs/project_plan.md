@@ -99,132 +99,62 @@ mindmap
         Stats{{🚧 Card statistics}}
     Study Modes
         Practice
-            Random order
             Practice session
         Exam{{🚧 Exam}}
-            Random order
             Exam session[🚧 Exam session]
-            ExamAltAnswers[🚧 Wrong answers]
-            ExamChoice[🚧 Multi-choice]
+            ExamAltAnswers[🚧 Distractors]
+            ExamChoice[🚧 Question Setup]
     Statistics{{🚧 Statistics}}
         CardViews{{🚧 Card view counts}}
         DeckPrac{{🚧 Deck practice counts}}
 ```
 
-### Workflow Model - Level 1
+### Workflow Model - Levels 1 & 2
 
-This domain model was designed in parallel with the UI design. I had Excalidraw open while choosing what kind of workflow fits the domain model.
-
-```mermaid
-stateDiagram-v2
-    classDef extension fill:#ff9900,stroke:#333,stroke-width:2px,color:black;
-
-    state what_to_do <<choice>>
-
-    [*] --> Dashboard
-    
-    Dashboard: Show Main UI / Tabs
-    Dashboard --> what_to_do: What to do?
-
-    what_to_do --> DecksTab
-    what_to_do --> CardsTab
-    what_to_do --> StudyRoom
-    what_to_do --> StatsTab
-
-    DecksTab: Manage Decks
-    CardsTab: Manage Cards
-    StudyRoom: Select Study Mode
-    StatsTab: View Statistics
-
-    StudyRoom --> Practice
-    StudyRoom --> Exam
-
-    class Exam extension
-    class StatsTab extension
-```
-
-!!! warning "Why are some boxes orange?"
-
-    The orange boxes represent the extension requirements. They are likely not going to be imlemented unless I find extra time.
-
-### Workflow Model - Level 2
-
-The `View statictics` has been omitted from this Level 2 diagram. I don't believe I will have to implement it.
+The `View statictics` has been omitted from this Level 2 diagram. I don't believe I will have to implement it. Also, this diagram contains the "Level 2" details directly, since the app is so simple that it doesn't make sense to split the workflow into multiple abstraction levels.
 
 ```mermaid
 stateDiagram-v2
     classDef extension fill:#ff9900,stroke:#333,stroke-width:2px,color:black;
 
-    state what_to_do <<choice>>
-    state deck_actions <<choice>>
-    state card_actions <<choice>>
-    state study_actions <<choice>>
-
     [*] --> Dashboard
     
-    Dashboard: Show Main UI
-    Dashboard --> what_to_do: What to do?
+    Dashboard: List of Decks
+    Dashboard --> ActiveDeck: Add, Edit or Select a Deck
 
-    %% The Three Main Categories
-    what_to_do --> DecksTab
-    what_to_do --> CardsTab
-    what_to_do --> StudyRoom
-
-    %% Decks Tab Options
-    DecksTab: Manage Decks
-    DecksTab --> deck_actions: Deck Options
-    deck_actions --> SelectDeck
-    deck_actions --> AddDeck
-    deck_actions --> DeleteDeck
-
-    %% Cards Tab Options
-    CardsTab: Manage Cards
-    CardsTab --> card_actions: Card Options
-    card_actions --> AddCard
-    card_actions --> EditCard
-    card_actions --> DeleteCard
-
-    %% Study Room Options
-    StudyRoom: Select Study Mode
-    StudyRoom --> study_actions: Study Options
-    study_actions --> PracticeView: Start Practice
-    study_actions --> ExamView: Start Exam
-
-    class ExamView extension
+    state ActiveDeck {
+        DeckMenu: Deck Chosen
+        [*] --> DeckMenu
+        
+        %% Management Flow
+        DeckMenu --> CardManagement: Manage Cards
+        state CardManagement {
+            [*] --> CardList: View Cards
+            CardList --> AddCard: + New Card
+            CardList --> EditCard: Modify/Delete
+        }
+        
+        %% Practice Flow
+        DeckMenu --> PracticeSession: Start Practice
+        state PracticeSession {
+            [*] --> FreeformPractice
+            FreeformPractice --> [*]: Leave practice
+        }
+        
+        %% Exam Flow (Extension)
+        DeckMenu --> ExamSession: Start Exam
+        state ExamSession {
+            [*] --> TakeExam
+            TakeExam --> [*]: Finish exam
+        }
+    }
+    
+    class ExamSession extension
 ```
 
-### Data Model - Level 1
+!!! note
 
-```mermaid
-flowchart TD
-    DeckManager -- contains --> Deck
-    Deck -- contain --> Flashcard
-```
-
-### Data Model - Level 2
-
-```mermaid
-flowchart TD
-    classDef extension fill:#ff9900,stroke:#333,stroke-width:2px,color:black;
-
-    DeckManager[Deck Manager]
-    
-    DeckManager -- contain --> Decks[Decks]
-    
-    Decks -- have --> DeckDetails[Deck Details]
-    Decks -- track --> DeckStats[Practice Counts]:::extension
-    
-    Decks -- contain --> Flashcards[Flashcards]
-    Decks -- used in --> Sessions[Study Sessions]
-    
-    Flashcards -- have --> CardContent[Front & Back]
-    Flashcards -- track --> CardStats[View Counts]:::extension
-    
-    Sessions -- have --> PracMode[Practice Mode Session]:::extension
-    Sessions -- have --> ExamMode[Exam Mode Session]:::extension
-    
-    Flashcards -- have --> Choices[Multiple Choice Options]:::extension
-```
+    Craig's Data Model has been omitted. The ER diagram above should be enough to cover the topic in this simple project.
 
 ## User Interface Design
 
