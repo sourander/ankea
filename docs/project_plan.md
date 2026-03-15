@@ -11,6 +11,11 @@ These are the requirements set by the course instructor. They are the minimum re
 * `UR-5`: In practice mode, the cards are always displayed in a random order.
 * `UR-6`: The user can edit and delete flashcard decks or their individual cards.
 
+
+!!! note "Implementation Note (UR-4 & UR-5):"
+
+    To satisfy both the random order requirement and the ability to move backward to the *previous* card, the application will use a "Session State" approach. When a Practice Session begins, the a new copy of the deck's card list it created, shuffled, and used during the session. This pretty much makes it so that during practice, one cannot edit cards. A new practice must be started to see the changes in cards.
+
 ### Extension Requirements (Nice-to-haves)
 
 The Game Stats and Exam Mode features are not required for the project, but are set by the course instructor as optional extension requirements. If I end up adding any of my own, I will add them under a separate "Additional Extension Requirements" heading.
@@ -35,7 +40,7 @@ None yet.
 
 ## Class Diagram (Data Model)
 
-This is a copy from the course material (translated to English). I will need to plan the methods and other paarameters later. Also, a separate class to handle the materialized Deck repository might be handy.
+This is a copy from the course material (translated to English). I have added the counter fields for the extension requirements.
 
 ```mermaid
 classDiagram
@@ -47,11 +52,13 @@ classDiagram
 		+String header
 		+String description
 		+List~Flashcard~ flashcards
+		+int practiceCount
 	}
 
 	class Flashcard {
 		+String front
 		+String back
+		+int viewCount
 	}
 
 	DeckManager "1" --> "0..*" Deck : contains
@@ -84,22 +91,20 @@ mindmap
 mindmap
   root((Ankea))
     Decks
-        Browse decks
-        Create new deck
-        Edit deck details
-        Delete deck
+        Cards
+        Stats{{🚧 Deck statistics}}
     Cards
-        Add new card
-        Edit front or back
-        Delete card
+        Front
+        Back
+        Stats{{🚧 Card statistics}}
     Study Modes
-        Practice Mode
-            Randomized order
-            Flip card
-            Navigate next and prev
-        ExamMode{{🚧 Exam Mode}}
-            ExamRand[🚧 Randomized order]
-            ExamNav[🚧 Navigate next]
+        Practice
+            Random order
+            Practice session
+        Exam{{🚧 Exam}}
+            Random order
+            Exam session[🚧 Exam session]
+            ExamAltAnswers[🚧 Wrong answers]
             ExamChoice[🚧 Multi-choice]
     Statistics{{🚧 Statistics}}
         CardViews{{🚧 Card view counts}}
@@ -108,98 +113,81 @@ mindmap
 
 ### Workflow Model - Level 1
 
+This domain model was designed in parallel with the UI design. I had Excalidraw open while choosing what kind of workflow fits the domain model.
+
 ```mermaid
 stateDiagram-v2
     classDef extension fill:#ff9900,stroke:#333,stroke-width:2px,color:black;
 
-    state main_choice <<choice>>
-    state study_choice <<choice>>
-    
-    Options: What to do?
-    StudyMode: Select study type
+    state what_to_do <<choice>>
 
     [*] --> Dashboard
     
-    Dashboard --> main_choice: User action
-    main_choice --> Dashboard: Create new deck
-    main_choice --> Options: Select existing deck
+    Dashboard: Show Main UI / Tabs
+    Dashboard --> what_to_do: What to do?
 
-    Options --> DeckEditor: Edit deck / manage cards
-    Options --> StudyMode: Start studying
+    what_to_do --> DecksTab
+    what_to_do --> CardsTab
+    what_to_do --> StudyRoom
+    what_to_do --> StatsTab
 
-    StudyMode --> study_choice
-    study_choice --> Practice: Choose Practice Mode
-    study_choice --> Exam: Choose Exam Mode
+    DecksTab: Manage Decks
+    CardsTab: Manage Cards
+    StudyRoom: Select Study Mode
+    StatsTab: View Statistics
+
+    StudyRoom --> Practice
+    StudyRoom --> Exam
 
     class Exam extension
+    class StatsTab extension
 ```
 
 ### Workflow Model - Level 2
 
+The `View statictics` has been omitted from this Level 2 diagram. I don't believe I will have to implement it.
+
 ```mermaid
 stateDiagram-v2
     classDef extension fill:#ff9900,stroke:#333,stroke-width:2px,color:black;
 
-    state options_choice <<choice>>
-    state edit_choice <<choice>>
-    state study_choice <<choice>>
+    state what_to_do <<choice>>
+    state deck_actions <<choice>>
+    state card_actions <<choice>>
+    state study_actions <<choice>>
 
-    Options: What to do with the selected deck?
+    [*] --> Dashboard
+    
+    Dashboard: Show Main UI
+    Dashboard --> what_to_do: What to do?
 
-    [*] --> Options
-    Options --> options_choice
+    %% The Three Main Categories
+    what_to_do --> DecksTab
+    what_to_do --> CardsTab
+    what_to_do --> StudyRoom
 
-    %% -------------------------------
-    %% BRANCH 1: DECK EDITOR
-    %% -------------------------------
-    options_choice --> DeckEditor: Manage deck
+    %% Decks Tab Options
+    DecksTab: Manage Decks
+    DecksTab --> deck_actions: Deck Options
+    deck_actions --> SelectDeck
+    deck_actions --> AddDeck
+    deck_actions --> DeleteDeck
 
-    DeckEditor: Deck & Card List
-    DeckEditor --> edit_choice: Select action
+    %% Cards Tab Options
+    CardsTab: Manage Cards
+    CardsTab --> card_actions: Card Options
+    card_actions --> AddCard
+    card_actions --> EditCard
+    card_actions --> DeleteCard
 
-    edit_choice --> EditDeck: Edit deck details
+    %% Study Room Options
+    StudyRoom: Select Study Mode
+    StudyRoom --> study_actions: Study Options
+    study_actions --> PracticeView: Start Practice
+    study_actions --> ExamView: Start Exam
 
-    edit_choice --> DeleteDeck: Delete deck
-    edit_choice --> AddCard: Add new card
-    edit_choice --> EditCard: Edit front/back
-    edit_choice --> DeleteCard: Delete card
-
-    %% -------------------------------
-    %% BRANCH 2: STUDY MODES
-    %% -------------------------------
-    options_choice --> StudyMode: Start studying
-
-    StudyMode: Select study type
-    StudyMode --> study_choice
-
-
-    %% --- Practice Mode Sub-branch ---
-    study_choice --> InitPractice: Practice Mode
-
-    InitPractice: Randomize card order
-    InitPractice --> PracticeTerm
-    PracticeTerm: Show front
-    PracticeTerm --> PracticeFlip: User flips card
-
-    PracticeFlip: Show back
-    PracticeFlip --> EndPractice: Finish deck
-    EndPractice: Increment practice count
-
-    %% --- Exam Mode Sub-branch ---
-    study_choice --> InitExam: Exam Mode
-
-    InitExam: Randomize order
-    InitExam --> ExamQuestion
-
-    ExamQuestion: Show front & choices
-    ExamQuestion --> ExamAnswer: User selects option
-    ExamAnswer: Show feedback
-    ExamAnswer --> EndExam: Finish exam
-
-    class ExamQuestion, ExamAnswer, EndExam extension
-    class EndPractice extension
+    class ExamView extension
 ```
-
 
 ### Data Model - Level 1
 
@@ -223,13 +211,10 @@ flowchart TD
     Decks -- track --> DeckStats[Practice Counts]:::extension
     
     Decks -- contain --> Flashcards[Flashcards]
-    Decks -- initiate --> Sessions[Study Sessions]:::extension
+    Decks -- used in --> Sessions[Study Sessions]
     
     Flashcards -- have --> CardContent[Front & Back]
     Flashcards -- track --> CardStats[View Counts]:::extension
-    
-    %% Cross-link showing how cards feed into the sessions
-    Flashcards -- populate --> Sessions
     
     Sessions -- have --> PracMode[Practice Mode Data]:::extension
     Sessions -- have --> ExamMode[Exam Mode Data]:::extension
@@ -240,4 +225,12 @@ flowchart TD
 
 ## User Interface Design
 
-TODO!
+My initial idea is to borrow the concept of **Pages** from DaVinci Resolve Studio, a video editing and color grading software. The main view of the application will be the Dashboard, which shows all the decks and their practice counts. From there, the user can either create a new deck or select an existing deck to manage or study. The same feature is called *Import, Edit, and Export Workflow* in Adobe Premiere Pro (see in action: [Closer Look at the New Import, Edit, and Export Workflow in Premiere Pro](https://www.4kshooters.net/2021/07/08/closer-look-at-the-new-import-edit-and-export-workflow-in-premiere-pro/)).
+
+During assignment, we are forced to use JavaFX, so my first think to do was to make sure that there is some form of support for this feature. I found this tutorialspoint article which confirms it: [JavaFX - TabPane](https://www.tutorialspoint.com/javafx/javafx_tabpane.htm).
+
+![](images/user_interface.svg)
+
+**Diagram 1:** Initial UI design. The main view is the Dashboard, which is shown in the 3 first frames. Each frame shows a different tab. The last frame shows the Practice View, which is a popup that is shown when the user clicks the "Practice" button in the Study Room tab. Open the image in a new tab to see the details.
+
+Idea is that the user will never have to explicitly **Save** anything. Observer pattern will be used to automatically update the data model and save the changes whenever the user makes any changes to the decks or cards. Obviously, in real life, there would have to be some sort of Undo feature, or version history, but that is out of scope for this project.
