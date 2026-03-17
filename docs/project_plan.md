@@ -36,35 +36,43 @@ The Game Stats and Exam Mode features are not required for the project, but are 
 
 #### Additional Extension Requirements
 
-None yet.
+* `OWN-9`: (non-functional) create a DeckRepository class that handles saving and loading decks to and from the file system. JSON format, Jackson library, just like in course lesson material. Should be called when exiting any Add/Edit mode or after clicking any Delete button.
 
 ## Class Diagram (Data Model)
 
 This is a copy from the course material (translated to English). I have added the counter fields for the extension requirements.
 
-```mermaid
 classDiagram
-	class DeckManager {
-		+List~Deck~ decks
-	}
+    class DeckRepository {
+        -String filePath
+        +saveAll(List~Deck~ decks)
+        +loadAll() List~Deck~
+    }
 
-	class Deck {
-		+String header
-		+String description
-		+List~Flashcard~ flashcards
-		+int practiceCount
-	}
+    class DeckManager {
+        -DeckRepository repository
+        +List~Deck~ decks
+        +addDeck(Deck deck)
+        +removeDeck(Deck deck)
+        +saveChanges()
+    }
 
-	class Flashcard {
-		+String front
-		+String back
-		+int viewCount
-	}
+    class Deck {
+        +String header
+        +String description
+        +List~Flashcard~ flashcards
+        +int practiceCount
+    }
 
-	DeckManager "1" --> "0..*" Deck : contains
-	Deck "1" --> "0..*" Flashcard : contains
-```
+    class Flashcard {
+        +String front
+        +String back
+        +int viewCount
+    }
 
+    DeckManager "1" --> "1" DeckRepository : uses
+    DeckManager "1" --> "0..*" Deck : manages
+    Deck "1" --> "0..*" Flashcard : contains
 ## Design Models
 
 This design pattern is from Craig Erray's *"Design for Complex Software Systems"* (Pearson / O'Reilly) live training from 2025.

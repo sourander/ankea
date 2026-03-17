@@ -7,7 +7,7 @@ open fun [initialize](initialize.md)(location: [URL](https://docs.oracle.com/jav
 
 Called by the JavaFX runtime after all `@FXML` fields have been injected. 
 
-Creates a new [AnkeaModel](../../fi.jyu.ohj2.sourander.ankea.model/-ankea-model/index.md), sets the initial label text, and registers a click handler on testButton that updates testLabel with the model's response.
+Creates a new [DeckManager](../../fi.jyu.ohj2.sourander.ankea.model/-deck-manager/index.md), populates it with a dummy deck and flashcard, and binds the visible demo text to those model values.
 
 #### Parameters
 

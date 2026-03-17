@@ -1,7 +1,9 @@
 // src/main/java/fi/jyu/ohj2/sourander/ankea/controller/MainController.java
 package fi.jyu.ohj2.sourander.ankea.controller;
 
-import fi.jyu.ohj2.sourander.ankea.model.AnkeaModel;
+import fi.jyu.ohj2.sourander.ankea.model.Deck;
+import fi.jyu.ohj2.sourander.ankea.model.DeckManager;
+import fi.jyu.ohj2.sourander.ankea.model.Flashcard;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,47 +16,58 @@ import java.util.ResourceBundle;
 /**
  * JavaFX controller for the main application view ({@code main.fxml}).
  *
- * <p>Wires the UI controls declared in FXML to the {@link AnkeaModel}
- * and sets up event handlers after the scene graph has been built.
+ * Sets up event handlers. Very observe. Such wow.
  */
 public class MainController implements Initializable {
 
-    /** The button the user clicks to trigger a model update. */
+    /** Happy little test button. Increases the flashcard view count. */
     @FXML
     private Button testButton;
 
-    /** Text area reserved for extended output (currently unused). */
+    /** Happy little text area. Shows the flashcard back side (Spanish, hola!). */
     @FXML
     private TextArea testTextArea;
 
-    /** Label that displays the latest response from the model. */
+    /** Print the view and stats into this box. Will be replaced when correct UI is done. */
     @FXML
     private Label testLabel;
 
-    /** The model instance that backs this controller. */
-    private AnkeaModel model;
+    /** The DeckManager itself. TODO: Implement loading and saving decks. */
+    private DeckManager model;
 
     /**
      * Called by the JavaFX runtime after all {@code @FXML} fields have been
      * injected.
      *
-     * <p>Creates a new {@link AnkeaModel}, sets the initial label text, and
-     * registers a click handler on {@link #testButton} that updates
-     * {@link #testLabel} with the model's response.
+     * Creates a new {@link DeckManager}. Does some funky demo stuff.
      *
-     * @param location  the URL of the FXML document (may be {@code null})
-     * @param resources the resource bundle for the root object (may be {@code null})
+     * Will be extended to load real decks and set up the actual UI when... it is time.
+     * 
+     * @param location  the URL of the FXML document 
+     * @param resources the resource bundle for the root object
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        model = new AnkeaModel();
-        
-        // This should now fire immediately upon load
-        testLabel.setText("Hello from the controller!");
+        model = new DeckManager();
 
-        // Handle the button click purely in Java code
+        Deck demoDeck = new Deck("Spanish Basics", "Hello world stuff");
+        Flashcard demoFlashcard = new Flashcard("hola", "hello");
+        demoDeck.addFlashcard(demoFlashcard);
+        model.addDeck(demoDeck);
+
+        testLabel.setText(demoDeck.getHeader() + ": " + demoFlashcard.getFront());
+        testTextArea.setText(demoFlashcard.getBack());
+        testButton.setText("Click me!");
+
         testButton.setOnAction(event -> {
-            testLabel.setText(model.generateResponse());
+            demoFlashcard.incrementViewCount();
+            testLabel.setText(
+                    demoDeck.getHeader()
+                            + " | "
+                            + demoFlashcard.getFront()
+                            + " | views: "
+                            + demoFlashcard.getViewCount()
+            );
         });
     }
 }

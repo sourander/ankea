@@ -6,4 +6,6 @@
 
 | Name | Summary |
 |---|---|
-| [AnkeaModel](-ankea-model/index.md) | [JVM]<br>open class [AnkeaModel](-ankea-model/index.md)<br>The data model for the Ankea application. |
+| [Deck](-deck/index.md) | [JVM]<br>open class [Deck](-deck/index.md)<br>Represents a flashcard deck with metadata, cards, and practice statistics. |
+| [DeckManager](-deck-manager/index.md) | [JVM]<br>open class [DeckManager](-deck-manager/index.md)<br>Root domain model that owns all decks in the application. |
+| [Flashcard](-flashcard/index.md) | [JVM]<br>open class [Flashcard](-flashcard/index.md)<br>Represents a single flashcard with a front side, a back side, and a view count. |
