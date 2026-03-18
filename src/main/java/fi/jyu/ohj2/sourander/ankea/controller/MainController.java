@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 
 import java.net.URL;
@@ -37,23 +38,27 @@ public class MainController implements Initializable {
     @FXML
     private Label testLabel;
 
+    /** The main tab pane containing all 3 tabs. */
+    @FXML
+    private TabPane mainTabPane;
+
     /** The DeckManager itself. */
     private DeckManager model;
 
-    /** Repository responsible for persisting decks to disk. 
-     * TODO: Utilize the methods for loading the decks on app startup.
-    */
+    /**
+     * Repository responsible for persisting decks to disk. TODO: Utilize the methods for loading
+     * the decks on app startup.
+     */
     private final DeckRepository repository = new DeckRepository();
 
     /**
-     * Called by the JavaFX runtime after all {@code @FXML} fields have been
-     * injected.
+     * Called by the JavaFX runtime after all {@code @FXML} fields have been injected.
      *
      * Creates a new {@link DeckManager}. Does some funky demo stuff.
      *
      * Will be extended to load real decks and set up the actual UI when... it is time.
      * 
-     * @param location  the URL of the FXML document 
+     * @param location the URL of the FXML document
      * @param resources the resource bundle for the root object
      */
     @Override
@@ -72,13 +77,25 @@ public class MainController implements Initializable {
 
         testButton.setOnAction(event -> {
             demoFlashcard.incrementViewCount();
-            testLabel.setText(
-                    demoDeck.getHeader()
-                            + " | "
-                            + demoFlashcard.getFront()
-                            + " | views: "
-                            + demoFlashcard.getViewCount()
-            );
+            testLabel.setText(demoDeck.getHeader() + " | " + demoFlashcard.getFront() + " | views: "
+                    + demoFlashcard.getViewCount());
+        });
+
+        mainTabPane.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
+            switch (mainTabPane.getTabs().indexOf(newTab)) {
+                case 0 -> {
+                    // Refresh the deck list or label here
+                    System.out.println("User returned to " + newTab.getText() + "!");
+                }
+                case 1 -> {
+                    // Update stats display here
+                    System.out.println("User switched to " + newTab.getText() + "!");
+                }
+                case 2 -> {
+                    // Update stats display here
+                    System.out.println("User switched to " + newTab.getText() + "!");
+                }
+            }
         });
 
         saveButton.setOnAction(event -> repository.saveAll(model.getDecks()));
