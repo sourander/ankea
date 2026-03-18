@@ -5,7 +5,7 @@
 [JVM]\
 open class [MainController](index.md)
 
-JavaFX controller for the main application view (`main.fxml`). Wires the UI controls declared in FXML to the deck-based domain model and sets up event handlers after the scene graph has been built.
+JavaFX controller for the main application view (`main.fxml`). Sets up event handlers. Very observe. Such wow.
 
 ## Constructors
 

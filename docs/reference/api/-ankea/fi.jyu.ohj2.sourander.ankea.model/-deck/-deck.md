@@ -5,7 +5,7 @@
 [JVM]\
 constructor()
 
-Creates an empty deck.
+Creates an empty deck. Not used, but JavaFX requires this
 
 [JVM]\
 constructor(header: [String](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html))

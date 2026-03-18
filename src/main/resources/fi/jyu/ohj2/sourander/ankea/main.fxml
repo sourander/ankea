@@ -88,6 +88,7 @@
             <Button fx:id="testButton" layoutX="286.0" layoutY="309.0" mnemonicParsing="false" text="Button" />
             <TextArea fx:id="testTextArea" layoutX="220.0" layoutY="157.0" prefHeight="133.0" prefWidth="200.0" />
             <Label fx:id="testLabel" layoutX="220.0" layoutY="62.0" prefHeight="75.0" prefWidth="200.0" text="Label" />
+            <Button fx:id="saveButton" layoutX="522.0" layoutY="309.0" mnemonicParsing="false" text="Button" />
       </children>
     </AnchorPane>
   </children>

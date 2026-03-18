@@ -4,6 +4,7 @@ package fi.jyu.ohj2.sourander.ankea.controller;
 import fi.jyu.ohj2.sourander.ankea.model.Deck;
 import fi.jyu.ohj2.sourander.ankea.model.DeckManager;
 import fi.jyu.ohj2.sourander.ankea.model.Flashcard;
+import fi.jyu.ohj2.sourander.ankea.repository.DeckRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -24,6 +25,10 @@ public class MainController implements Initializable {
     @FXML
     private Button testButton;
 
+    /** Saves the current decks to the local JSON database. */
+    @FXML
+    private Button saveButton;
+
     /** Happy little text area. Shows the flashcard back side (Spanish, hola!). */
     @FXML
     private TextArea testTextArea;
@@ -32,8 +37,13 @@ public class MainController implements Initializable {
     @FXML
     private Label testLabel;
 
-    /** The DeckManager itself. TODO: Implement loading and saving decks. */
+    /** The DeckManager itself. */
     private DeckManager model;
+
+    /** Repository responsible for persisting decks to disk. 
+     * TODO: Utilize the methods for loading the decks on app startup.
+    */
+    private final DeckRepository repository = new DeckRepository();
 
     /**
      * Called by the JavaFX runtime after all {@code @FXML} fields have been
@@ -58,6 +68,7 @@ public class MainController implements Initializable {
         testLabel.setText(demoDeck.getHeader() + ": " + demoFlashcard.getFront());
         testTextArea.setText(demoFlashcard.getBack());
         testButton.setText("Click me!");
+        saveButton.setText("Save");
 
         testButton.setOnAction(event -> {
             demoFlashcard.incrementViewCount();
@@ -69,5 +80,7 @@ public class MainController implements Initializable {
                             + demoFlashcard.getViewCount()
             );
         });
+
+        saveButton.setOnAction(event -> repository.saveAll(model.getDecks()));
     }
 }

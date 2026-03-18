@@ -38,10 +38,11 @@ The Game Stats and Exam Mode features are not required for the project, but are 
 
 * `OWN-9`: (non-functional) create a DeckRepository class that handles saving and loading decks to and from the file system. JSON format, Jackson library, just like in course lesson material. Should be called when exiting any Add/Edit mode or after clicking any Delete button.
 
-## Class Diagram (Data Model)
+## Class Diagram (roughly also the Data Model)
 
-This is a copy from the course material (translated to English). I have added the counter fields for the extension requirements.
+This is a copy from the course material (translated to English). I have added the counter fields and the DeckRepository. The DeckRepository is not "data", so it will be placed into `./repostiory` package instead of `./model`.
 
+```mermaid
 classDiagram
     class DeckRepository {
         -String filePath
@@ -73,6 +74,8 @@ classDiagram
     DeckManager "1" --> "1" DeckRepository : uses
     DeckManager "1" --> "0..*" Deck : manages
     Deck "1" --> "0..*" Flashcard : contains
+```
+
 ## Design Models
 
 This design pattern is from Craig Erray's *"Design for Complex Software Systems"* (Pearson / O'Reilly) live training from 2025.

@@ -6,6 +6,7 @@ $dokka.location:fi.jyu.ohj2.sourander.ankea.controller/MainController/MainContro
 $dokka.location:fi.jyu.ohj2.sourander.ankea.controller/MainController/initialize/#java.net.URL#java.util.ResourceBundle/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.controller/-main-controller/initialize.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model////PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/index.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck///PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/index.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/DEFAULT_HEADER/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/-d-e-f-a-u-l-t_-h-e-a-d-e-r.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/Deck/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/-deck.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/Deck/#java.lang.String#java.lang.String/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/-deck.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/Deck/#java.lang.String/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/-deck.md
@@ -51,6 +52,12 @@ $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Flashcard/setFront/#java.lang.
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Flashcard/setViewCount/#int/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-flashcard/set-view-count.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Flashcard/toString/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-flashcard/to-string.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Flashcard/viewCountProperty/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-flashcard/view-count-property.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.repository////PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.repository/index.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.repository/DeckRepository///PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.repository/-deck-repository/index.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.repository/DeckRepository/DeckRepository/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.repository/-deck-repository/-deck-repository.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.repository/DeckRepository/DeckRepository/#java.nio.file.Path/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.repository/-deck-repository/-deck-repository.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.repository/DeckRepository/loadAll/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.repository/-deck-repository/load-all.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.repository/DeckRepository/saveAll/#java.util.List<fi.jyu.ohj2.sourander.ankea.model.Deck>/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.repository/-deck-repository/save-all.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea////PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea/index.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea/App///PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea/-app/index.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea/App/App/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea/-app/-app.md
@@ -59,3 +66,4 @@ $dokka.location:fi.jyu.ohj2.sourander.ankea/App/start/#Stage/PointingToDeclarati
 fi.jyu.ohj2.sourander.ankea
 fi.jyu.ohj2.sourander.ankea.controller
 fi.jyu.ohj2.sourander.ankea.model
+fi.jyu.ohj2.sourander.ankea.repository

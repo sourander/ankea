@@ -13,6 +13,12 @@ Represents a flashcard deck with metadata, cards, and practice statistics.
 |---|---|
 | [Deck](-deck.md) | [JVM]<br>constructor()<br>Creates an empty deck.<br>constructor(header: [String](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html))<br>Creates a deck with a header.<br>constructor(header: [String](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html), description: [String](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html))<br>Creates a deck with a header and description. |
 
+## Properties
+
+| Name | Summary |
+|---|---|
+| [DEFAULT_HEADER](-d-e-f-a-u-l-t_-h-e-a-d-e-r.md) | [JVM]<br>val [DEFAULT_HEADER](-d-e-f-a-u-l-t_-h-e-a-d-e-r.md): [String](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html) = &quot;This one has no name&quot;<br>Default header used when a deck is created without a user-provided name. |
+
 ## Functions
 
 | Name | Summary |
