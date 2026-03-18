@@ -178,3 +178,7 @@ During assignment, we are forced to use JavaFX, so my first think to do was to m
 **Diagram 1:** Initial UI design. The main view is the Dashboard, which is shown in the 3 first frames. Each frame shows a different tab. The last frame shows the Practice View, which is a popup that is shown when the user clicks the "Practice" button in the Study Room tab. Open the image in a new tab to see the details.
 
 Idea is that the user will never have to explicitly **Save** anything. Observer pattern will be used to automatically update the data model and save the changes whenever the user makes any changes to the decks or cards. Obviously, in real life, there would have to be some sort of Undo feature, or version history, but that is out of scope for this project.
+
+![](images/user_interface_popups.svg)
+
+**Diagram 2:** When the user chooses New or Edit, a new popup window is shown. The underlying Dashboard cannot be interacted with until the popup is closed. The user can either save the changes by clicking the "Save" button, or discard the changes by clicking the "Cancel" button or closing the window. The pop-up on the left side is for creating (or editing) a Deck, the right one is for doing the same for a Flashcard.
