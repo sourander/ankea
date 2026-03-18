@@ -39,26 +39,26 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="fi.jyu.ohj2.sourander.ankea.controller.MainController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.jyu.ohj2.sourander.ankea.controller.MainController">
   <tabs>
-      <Tab text="Study Room">
+      <Tab fx:id="decksTab" text="Decks">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="testButton" layoutX="184.0" layoutY="295.0" mnemonicParsing="false" text="Test Button" />
-                  <TextArea fx:id="testTextArea" layoutX="119.0" layoutY="72.0" prefHeight="130.0" prefWidth="416.0" text="This is a test text area" />
-                  <Button fx:id="saveButton" layoutX="300.0" layoutY="295.0" mnemonicParsing="false" text="Save Button" />
-                  <Label fx:id="testLabel" layoutX="151.0" layoutY="30.0" text="Test Label" />
+                  <Button fx:id="testButton" layoutX="180.0" layoutY="308.0" mnemonicParsing="false" text="Test Button" AnchorPane.bottomAnchor="35.0" />
+                  <TextArea fx:id="testTextArea" layoutX="13.0" layoutY="60.0" prefHeight="220.0" prefWidth="574.0" text="This is a test text area" AnchorPane.bottomAnchor="89.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="60.0" />
+                  <Button fx:id="saveButton" layoutX="300.0" layoutY="308.0" mnemonicParsing="false" text="Save Button" AnchorPane.bottomAnchor="35.0" />
+                  <Label fx:id="testLabel" layoutX="15.0" layoutY="28.0" prefHeight="18.0" prefWidth="568.0" text="Test Label" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="17.0" />
                </children>
             </AnchorPane>
         </content>
       </Tab>
-      <Tab text="Study Room">
+      <Tab fx:id="cardsTab" text="Cards">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
          </content>
       </Tab>
-      <Tab text="Study Room">
+      <Tab fx:id="studyRoomTab" text="Study Room">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
          </content>
