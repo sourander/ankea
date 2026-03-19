@@ -1,17 +1,23 @@
 // src/main/java/fi/jyu/ohj2/sourander/ankea/controller/MainController.java
 package fi.jyu.ohj2.sourander.ankea.controller;
 
+import fi.jyu.ohj2.sourander.ankea.App;
 import fi.jyu.ohj2.sourander.ankea.model.Deck;
 import fi.jyu.ohj2.sourander.ankea.model.DeckManager;
 import fi.jyu.ohj2.sourander.ankea.model.Flashcard;
 import fi.jyu.ohj2.sourander.ankea.repository.DeckRepository;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
-
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -79,6 +85,8 @@ public class MainController implements Initializable {
             demoFlashcard.incrementViewCount();
             testLabel.setText(demoDeck.getHeader() + " | " + demoFlashcard.getFront() + " | views: "
                     + demoFlashcard.getViewCount());
+
+            openEditDeckWindow(demoDeck);
         });
 
         mainTabPane.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
@@ -99,5 +107,27 @@ public class MainController implements Initializable {
         });
 
         saveButton.setOnAction(event -> repository.saveAll(model.getDecks()));
+    }
+
+    private void openEditDeckWindow(Deck deck) {
+        try {
+            FXMLLoader loader =  new FXMLLoader(App.class.getResource("edit-deck.fxml"));
+            Parent root = loader.load();
+            Scene scene =  new Scene(root);
+
+            EditDeckController controller = loader.getController();
+            controller.setDeck(deck);
+
+            Stage dialogi = new Stage();
+            dialogi.setScene(scene);
+
+            dialogi.setTitle("Muokkaa: " + deck.getHeader());
+            dialogi.setMinWidth(400);
+            dialogi.setMinHeight(300);
+            dialogi.initModality(Modality.APPLICATION_MODAL); // Other windows cannot be used before closing this.
+            dialogi.showAndWait();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
