@@ -40,4 +40,5 @@ Represents a flashcard deck with metadata, cards, and practice statistics.
 | [setFlashcards](set-flashcards.md) | [JVM]<br>open fun [setFlashcards](set-flashcards.md)(flashcards: ObservableList&lt;Flashcard&gt;)<br>Replaces the flashcards list content. |
 | [setHeader](set-header.md) | [JVM]<br>open fun [setHeader](set-header.md)(header: [String](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html))<br>Updates the deck header. |
 | [setPracticeCount](set-practice-count.md) | [JVM]<br>open fun [setPracticeCount](set-practice-count.md)(practiceCount: [Int](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html))<br>Updates the practice count. |
+| [shuffledCopy](shuffled-copy.md) | [JVM]<br>open fun [shuffledCopy](shuffled-copy.md)(): [Deck](index.md) |
 | [toString](to-string.md) | [JVM]<br>open fun [toString](to-string.md)(): [String](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html) |
