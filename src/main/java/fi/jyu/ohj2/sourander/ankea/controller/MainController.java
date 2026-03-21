@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
+import java.util.function.Consumer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -94,27 +95,12 @@ public class MainController implements Initializable {
         decksTable.setItems(model.getDecks());
         setupDecksTableColumns();
 
-        decksTable.setRowFactory(tv -> {
-            TableRow<Deck> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 && !row.isEmpty()) {
-                    editDeck(row.getItem());
-                }
-            });
-            return row;
-        });
+        setDoubleClickHandler(decksTable, this::editDeck);
+        setDoubleClickHandler(cardsTable, this::editCard);
 
         addDeckButton.setOnAction(event -> addDeck());
         editDeckButton.setOnAction(event -> editDeck(decksTable.getSelectionModel().getSelectedItem()));
         deleteDeckButton.setOnAction(event -> deleteDeck());
-
-        mainTabPane.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
-            switch (mainTabPane.getTabs().indexOf(newTab)) {
-                case 0 -> System.out.println("User returned to " + newTab.getText() + "!");
-                case 1 -> System.out.println("User switched to " + newTab.getText() + "!");
-                case 2 -> System.out.println("User switched to " + newTab.getText() + "!");
-            }
-        });
 
         // TAB TWO: Flashcard management
         deckSelectionInfoLabel.setText(NO_DECK_SELECTED_MSG);
@@ -147,6 +133,18 @@ public class MainController implements Initializable {
         startExamButton.setDisable(true);
         startPracticeButton.setOnAction(event -> startPractice());
         startExamButton.setOnAction(event -> startExam());
+    }
+
+    private <T> void setDoubleClickHandler(TableView<T> table, Consumer<T> onDoubleClick) {
+        table.setRowFactory(tv -> {
+            TableRow<T> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 && !row.isEmpty()) {
+                    onDoubleClick.accept(row.getItem());
+                }
+            });
+            return row;
+        });
     }
 
     /** Configures the columns of {@code decksTable} and binds the description column width. */

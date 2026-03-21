@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -63,6 +65,27 @@ public class PracticeModeController implements Initializable {
 
         backRevealed.addListener((obs, old, isNowRevealed) -> applyRevealStyle(isNowRevealed));
         applyRevealStyle(false);
+
+        exitButton.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.addEventFilter(KeyEvent.KEY_PRESSED, this::handleKeyPress);
+            }
+        });
+    }
+
+    private void handleKeyPress(KeyEvent event) {
+        if (event.getCode() == KeyCode.LEFT) {
+            practicePrevCard();
+            event.consume();
+        } else if (event.getCode() == KeyCode.RIGHT) {
+            practiceNextCard();
+            event.consume();
+        } else if (event.getCode() == KeyCode.SPACE) {
+            if (!backRevealed.get()) {
+                backRevealed.set(true);
+            }
+            event.consume();
+        }
     }
 
     private void applyRevealStyle(boolean isRevealed) {

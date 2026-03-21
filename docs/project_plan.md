@@ -37,7 +37,7 @@ The Game Stats and Exam Mode features are not required for the project, but are 
 #### Additional Extension Requirements
 
 * `OWN-9`: ✅ DeckRepository class handles saving and loading decks to and from the file system. JSON format, Jackson library, just like in course lesson material. Should be called when exiting any Add/Edit mode or after clicking any Delete button.
-* `OWN-10`: The Practice mode can be played without mouse. Arrow keys are Prev/Next and Spacebar is Flip.
+* `OWN-10`: ✅ The Practice mode can be played without mouse. Arrow keys are Prev/Next and Spacebar is Flip.
 
 ## Class Diagram (roughly also the Data Model)
 
