@@ -4,6 +4,7 @@ package fi.jyu.ohj2.sourander.ankea.controller;
 import fi.jyu.ohj2.sourander.ankea.App;
 import fi.jyu.ohj2.sourander.ankea.model.Deck;
 import fi.jyu.ohj2.sourander.ankea.model.DeckManager;
+import fi.jyu.ohj2.sourander.ankea.model.Flashcard;
 import fi.jyu.ohj2.sourander.ankea.repository.DeckRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,10 +16,12 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -46,6 +49,25 @@ public class MainController implements Initializable {
     @FXML
     private Button deleteDeckButton;
 
+    /** The table displaying all flashcards. */
+    @FXML
+    private TableView<Flashcard> cardsTable;
+
+    @FXML
+    private Label deckSelectionInfoLabel;
+
+    @FXML
+    private Button addCardButton;
+
+    @FXML
+    private Button editCardButton;
+
+    @FXML
+    private Button deleteCardButton;
+
+    private static final String NO_DECK_SELECTED_MSG =
+            "No Deck selected. Navigate to Decks tab to select or create one.";
+
     /** The DeckManager itself. */
     private DeckManager model;
 
@@ -67,6 +89,7 @@ public class MainController implements Initializable {
         model = new DeckManager();
         model.getDecks().addAll(repository.loadAll());
 
+        // TAB ONE: Deck management
         decksTable.setItems(model.getDecks());
         setupDecksTableColumns();
 
@@ -91,6 +114,24 @@ public class MainController implements Initializable {
                 case 2 -> System.out.println("User switched to " + newTab.getText() + "!");
             }
         });
+
+        // TAB TWO: Flashcard management
+        deckSelectionInfoLabel.setText(NO_DECK_SELECTED_MSG);
+        setupCardsTableColumns();
+
+        decksTable.getSelectionModel().selectedItemProperty().addListener((obs, oldDeck, newDeck) -> {
+            if (newDeck == null) {
+                cardsTable.setItems(null);
+                deckSelectionInfoLabel.setText(NO_DECK_SELECTED_MSG);
+            } else {
+                cardsTable.setItems(newDeck.flashcardsProperty());
+                deckSelectionInfoLabel.setText("Showing cards for deck: " + newDeck.getHeader());
+            }
+        });
+
+        addCardButton.setOnAction(event -> addCard());
+        editCardButton.setOnAction(event -> editCard(cardsTable.getSelectionModel().getSelectedItem()));
+        deleteCardButton.setOnAction(event -> deleteCard());
     }
 
     /** Configures the columns of {@code decksTable} and binds the description column width. */
@@ -118,6 +159,38 @@ public class MainController implements Initializable {
             .subtract(countCol.widthProperty())
             .subtract(practiceCol.widthProperty())
             .subtract(2)
+        );
+    }
+
+    /** Configures the columns of {@code decksTable} and binds the description column width. */
+    private void setupCardsTableColumns() {
+        TableColumn<Flashcard, String> nameCol = new TableColumn<>("Front");
+        nameCol.setCellValueFactory(cd -> cd.getValue().frontProperty());
+
+        TableColumn<Flashcard, String> descCol = new TableColumn<>("Back");
+        descCol.setCellValueFactory(cd -> cd.getValue().backProperty());
+
+        TableColumn<Flashcard, Number> countCol = new TableColumn<>("Use #");
+        countCol.setCellValueFactory(cd -> cd.getValue().viewCountProperty());
+
+        cardsTable.getColumns().add(nameCol);
+        cardsTable.getColumns().add(descCol);
+        cardsTable.getColumns().add(countCol);
+
+        // Bind nameCol (Front) to half of the remaining space
+        nameCol.prefWidthProperty().bind(
+            cardsTable.widthProperty()
+            .subtract(countCol.widthProperty())
+            .subtract(2) // Account for table borders
+            .divide(2)   // Divide the remaining space by 2
+        );
+
+        // Bind descCol (Back) to the exact same calculation
+        descCol.prefWidthProperty().bind(
+            cardsTable.widthProperty()
+            .subtract(countCol.widthProperty())
+            .subtract(2)
+            .divide(2)
         );
     }
 
@@ -152,6 +225,36 @@ public class MainController implements Initializable {
         repository.saveAll(model.getDecks());
     }
 
+    /** Opens the add-or-edit-card dialog and, if confirmed, persists the parent deck. */
+    private void addCard() {
+        Deck selectedDeck = decksTable.getSelectionModel().getSelectedItem();
+        if (selectedDeck == null) return;
+        Flashcard newCard = new Flashcard();
+        openEditFlashcardWindow(selectedDeck, newCard, "Add card");
+        if (selectedDeck.flashcardsProperty().contains(newCard)) {
+            repository.saveAll(model.getDecks());
+        }
+    }
+
+    /** Opens the add-or-edit-card dialog and, if confirmed, persists the parent deck. */
+    private void editCard(Flashcard card) {
+        Deck selectedDeck = decksTable.getSelectionModel().getSelectedItem();
+        if (selectedDeck == null || card == null) return;
+        openEditFlashcardWindow(selectedDeck, card, "Edit card");
+        if (selectedDeck.flashcardsProperty().contains(card)) {
+            repository.saveAll(model.getDecks());
+        }
+    }
+
+    /** Deletes the card that is selected. */
+    private void deleteCard() {
+        Deck selectedDeck = decksTable.getSelectionModel().getSelectedItem();
+        Flashcard selectedCard = cardsTable.getSelectionModel().getSelectedItem();
+        if (selectedDeck == null || selectedCard == null) return;
+        selectedDeck.removeFlashcard(selectedCard);
+        repository.saveAll(model.getDecks());
+    }
+
     /**
      * Loads and displays the edit-deck dialog as a modal window.
      *
@@ -177,6 +280,35 @@ public class MainController implements Initializable {
             dialogi.showAndWait();
 
             return controller;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    /**
+     * Loads and displays the edit-card dialog as a modal window.
+     *
+     * @param deck        the deck that will own the card
+     * @param card        the card to pass to the dialog
+     * @param titlePrefix prefix used in the window title
+     */
+    private void openEditFlashcardWindow(Deck deck, Flashcard card, String titlePrefix) {
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("edit-card.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+            EditCardController controller = loader.getController();
+            controller.setCard(deck, card);
+
+            Stage dialogi = new Stage();
+            dialogi.setScene(scene);
+            dialogi.setTitle(titlePrefix + ": " + card.getFront());
+            dialogi.setMinWidth(400);
+            dialogi.setMinHeight(300);
+            dialogi.initModality(Modality.APPLICATION_MODAL);
+            dialogi.showAndWait();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

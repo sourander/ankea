@@ -58,10 +58,10 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <TableView fx:id="cardsTable" layoutX="29.0" layoutY="31.0" prefHeight="267.0" prefWidth="570.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="42.0" />
-                  <Button layoutX="21.0" layoutY="322.0" minWidth="50.0" mnemonicParsing="false" text="Add" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="15.0" />
-                  <Button layoutX="75.0" layoutY="322.0" minWidth="50.0" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="75.0" />
-                  <Button layoutX="129.0" layoutY="322.0" minWidth="50.0" mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="135.0" />
-                  <Label layoutX="24.0" layoutY="14.0" text="No Deck selected" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+                  <Button fx:id="addCardButton" layoutX="21.0" layoutY="322.0" minWidth="50.0" mnemonicParsing="false" text="Add" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="15.0" />
+                  <Button fx:id="editCardButton" layoutX="75.0" layoutY="322.0" minWidth="50.0" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="75.0" />
+                  <Button fx:id="deleteCardButton" layoutX="129.0" layoutY="322.0" minWidth="50.0" mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="135.0" />
+                  <Label fx:id="deckSelectionInfoLabel" layoutX="24.0" layoutY="14.0" text="No Deck selected" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
                </children></AnchorPane>
          </content>
       </Tab>
