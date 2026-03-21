@@ -36,7 +36,6 @@ public class PracticeModeController implements Initializable {
 
     private Deck deck;
     private Deck shuffledDeck; // This will hold the shuffled cards for practice
-    private int n;
 
     private final BooleanProperty backRevealed = new SimpleBooleanProperty(false);
     private String currentBackText = "";
