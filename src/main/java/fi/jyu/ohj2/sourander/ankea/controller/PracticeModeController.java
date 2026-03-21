@@ -9,6 +9,8 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,10 +36,17 @@ public class PracticeModeController implements Initializable {
     private Deck shuffledDeck; // This will hold the shuffled cards for practice
     private int n;
 
+    private final BooleanProperty backRevealed = new SimpleBooleanProperty(false);
+    private String currentBackText = "";
+
     private final IntegerProperty currentCardIndex = new SimpleIntegerProperty(-1);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // User has no need to touch these
+        frontTextArea.setEditable(false);
+        backTextArea.setEditable(false);
+
         prevButton.disableProperty().bind(
             currentCardIndex.lessThanOrEqualTo(0)
         );
@@ -49,6 +58,21 @@ public class PracticeModeController implements Initializable {
         prevButton.setOnAction(event -> practicePrevCard());
         exitButton.setOnAction(event -> closeWindow());
         nextButton.setOnAction(event -> practiceNextCard());
+
+        backTextArea.setOnMouseClicked(event -> backRevealed.set(true));
+
+        backRevealed.addListener((obs, old, isNowRevealed) -> applyRevealStyle(isNowRevealed));
+        applyRevealStyle(false);
+    }
+
+    private void applyRevealStyle(boolean isRevealed) {
+        if (isRevealed) {
+            backTextArea.setText(currentBackText);
+            backTextArea.setStyle("-fx-control-inner-background: #ffffff; -fx-text-fill: #000000;"); 
+        } else {
+            backTextArea.setText("Click to reveal answer");
+            backTextArea.setStyle("-fx-control-inner-background: #e0e0e0; -fx-text-fill: #757575;");
+        }
     }
 
     private void practicePrevCard() {
@@ -67,8 +91,11 @@ public class PracticeModeController implements Initializable {
         int index = currentCardIndex.get();
         if (shuffledDeck != null && index >= 0 && index < shuffledDeck.getFlashcards().size()) {
             Flashcard current = shuffledDeck.getFlashcards().get(index);
+            
             frontTextArea.setText(current.getFront());
-            backTextArea.setText(current.getBack());
+            currentBackText = current.getBack();
+            
+            backRevealed.set(false); 
         }
     }
 
