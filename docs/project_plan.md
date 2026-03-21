@@ -4,12 +4,12 @@
 
 These are the requirements set by the course instructor. They are the minimum requirements that must be met for the project to be considered complete. I've simply translated them from Finnish to English. As written before, Ankea is a simple flashcard application inspired by Anki.
 
-* `UR-1`: The user can create flashcard decks that contain cards. A deck has a name and an optional description.
-* `UR-2`: The user can add cards to a flashcard deck. A card has a term and an explanation (front and back side).
-* `UR-3`: The user can browse and edit the added flashcard decks.
-* `UR-4`: The user can practice the cards of a deck in a "practice mode". In practice mode, the user is shown the front side of a single card. The user can view the explanation of the card by "flipping" the card. After that, the user can move to the next or previous card.
-* `UR-5`: In practice mode, the cards are always displayed in a random order.
-* `UR-6`: The user can edit and delete flashcard decks or their individual cards.
+* `UR-1`: ✅ The user can create flashcard decks that contain cards. A deck has a name and an optional description.
+* `UR-2`: ✅ The user can add cards to a flashcard deck. A card has a term and an explanation (front and back side).
+* `UR-3`: ✅ The user can browse and edit the added flashcard decks.
+* `UR-4`: ✅ The user can practice the cards of a deck in a "practice mode". In practice mode, the user is shown the front side of a single card. The user can view the explanation of the card by "flipping" the card. After that, the user can move to the next or previous card.
+* `UR-5`: ✅ In practice mode, the cards are always displayed in a random order.
+* `UR-6`: ✅ The user can edit and delete flashcard decks or their individual cards.
 
 
 !!! note "Implementation Note (UR-4 & UR-5):"
@@ -24,8 +24,8 @@ The Game Stats and Exam Mode features are not required for the project, but are 
 
 * `ER-1`: Add a view count for each card. Each time the user reveals a card's explanation in practice mode, the card's view count increases by one.
 * `ER-2`: Card view counts are shown in the card table in the deck edit view.
-* `ER-3`: Add a practice count for each deck. Each time the user opens practice mode and practices every card in the deck once, the deck's practice count increases by one.
-* `ER-4`: Deck practice counts are shown in the main view as a separate column.
+* `ER-3`: ✅ Add a practice count for each deck. Each time the user opens practice mode and practices every card in the deck once, the deck's practice count increases by one.
+* `ER-4`: ✅ Deck practice counts are shown in the main view as a separate column.
 
 #### Exam Mode
 
@@ -36,7 +36,8 @@ The Game Stats and Exam Mode features are not required for the project, but are 
 
 #### Additional Extension Requirements
 
-* `OWN-9`: (non-functional) create a DeckRepository class that handles saving and loading decks to and from the file system. JSON format, Jackson library, just like in course lesson material. Should be called when exiting any Add/Edit mode or after clicking any Delete button.
+* `OWN-9`: ✅ DeckRepository class handles saving and loading decks to and from the file system. JSON format, Jackson library, just like in course lesson material. Should be called when exiting any Add/Edit mode or after clicking any Delete button.
+* `OWN-10`: The Practice mode can be played without mouse. Arrow keys are Prev/Next and Spacebar is Flip.
 
 ## Class Diagram (roughly also the Data Model)
 
