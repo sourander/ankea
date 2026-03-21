@@ -82,6 +82,9 @@ public class Deck {
             throw new IllegalArgumentException("header must not be blank");
         }
 
+        // Trim the header to remove leading/trailing whitespace
+        header = header.trim();
+
         this.header.set(header);
     }
 

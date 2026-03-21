@@ -46,13 +46,29 @@ public class Flashcard {
         return front.get();
     }
 
+    private String validateStringField(String value, String fieldName) {
+        if (value == null) {
+            throw new IllegalArgumentException(fieldName + " must not be null");
+        }
+
+        if (value.isBlank()) {
+            throw new IllegalArgumentException(fieldName + " must not be blank");
+        }
+
+        // Trim the fieldName to remove leading/trailing whitespace
+        value = value.trim();
+
+        return value;
+    }
+
     /**
      * Updates the front side text.
      *
      * @param front the new front side text
      */
     public void setFront(String front) {
-        this.front.set(front == null ? "" : front);
+        front = validateStringField(front, "front");
+        this.front.set(front);
     }
 
     /**
@@ -79,7 +95,8 @@ public class Flashcard {
      * @param back the new back side text
      */
     public void setBack(String back) {
-        this.back.set(back == null ? "" : back);
+        back = validateStringField(back, "back");
+        this.back.set(back);
     }
 
     /**

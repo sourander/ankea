@@ -150,4 +150,13 @@ class DeckTest {
         assertTrue(deck.getFlashcards().contains(two));
         assertTrue(deck.getFlashcards().contains(three));
     }
+
+    /* Verifies that the deck header is trimmed of leading and trailing whitespace  */
+    @Test
+    void headerIsTrimmed() {
+        Deck deck = new Deck("   French   ");
+        assertEquals("French", deck.getHeader());
+        deck.setHeader("   Advanced French   ");
+        assertEquals("Advanced French", deck.getHeader());
+    }
 }

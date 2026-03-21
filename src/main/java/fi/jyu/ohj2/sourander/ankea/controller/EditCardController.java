@@ -4,6 +4,7 @@ import fi.jyu.ohj2.sourander.ankea.model.Deck;
 import fi.jyu.ohj2.sourander.ankea.model.Flashcard;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
@@ -31,8 +32,17 @@ public class EditCardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         saveButton.setOnAction(event -> {
-            card.setFront(frontTextArea.getText());
-            card.setBack(backTextArea.getText());
+            try {
+                card.setFront(frontTextArea.getText());
+                card.setBack(backTextArea.getText());
+            } catch (IllegalArgumentException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Validation error");
+                alert.setHeaderText(null);
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+                return;
+            }
             if (!deck.flashcardsProperty().contains(card)) {
                 deck.addFlashcard(card);
             }
