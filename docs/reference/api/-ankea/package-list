@@ -7,6 +7,7 @@ $dokka.location:fi.jyu.ohj2.sourander.ankea.controller/EditCardController/initia
 $dokka.location:fi.jyu.ohj2.sourander.ankea.controller/EditDeckController///PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.controller/-edit-deck-controller/index.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.controller/EditDeckController/EditDeckController/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.controller/-edit-deck-controller/-edit-deck-controller.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.controller/EditDeckController/initialize/#java.net.URL#java.util.ResourceBundle/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.controller/-edit-deck-controller/initialize.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.controller/EditDeckController/isSaved/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.controller/-edit-deck-controller/is-saved.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.controller/EditDeckController/setDeck/#fi.jyu.ohj2.sourander.ankea.model.Deck/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.controller/-edit-deck-controller/set-deck.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.controller/MainController///PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.controller/-main-controller/index.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.controller/MainController/MainController/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.controller/-main-controller/-main-controller.md

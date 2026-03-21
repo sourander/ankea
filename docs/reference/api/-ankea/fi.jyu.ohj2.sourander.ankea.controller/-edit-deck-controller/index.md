@@ -16,4 +16,5 @@ open class [EditDeckController](index.md)
 | Name | Summary |
 |---|---|
 | [initialize](initialize.md) | [JVM]<br>open fun [initialize](initialize.md)(location: [URL](https://docs.oracle.com/javase/8/docs/api/java/net/URL.html), resources: [ResourceBundle](https://docs.oracle.com/javase/8/docs/api/java/util/ResourceBundle.html)) |
+| [isSaved](is-saved.md) | [JVM]<br>open fun [isSaved](is-saved.md)(): [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) |
 | [setDeck](set-deck.md) | [JVM]<br>open fun [setDeck](set-deck.md)(deck: [Deck](../../fi.jyu.ohj2.sourander.ankea.model/-deck/index.md)) |

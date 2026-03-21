@@ -17,4 +17,4 @@ JavaFX controller for the main application view (`main.fxml`). Sets up event han
 
 | Name | Summary |
 |---|---|
-| [initialize](initialize.md) | [JVM]<br>open fun [initialize](initialize.md)(location: [URL](https://docs.oracle.com/javase/8/docs/api/java/net/URL.html), resources: [ResourceBundle](https://docs.oracle.com/javase/8/docs/api/java/util/ResourceBundle.html))<br>Called by the JavaFX runtime after all `@FXML` fields have been injected. |
+| [initialize](initialize.md) | [JVM]<br>open fun [initialize](initialize.md)(location: [URL](https://docs.oracle.com/javase/8/docs/api/java/net/URL.html), resources: [ResourceBundle](https://docs.oracle.com/javase/8/docs/api/java/util/ResourceBundle.html))<br>Initialises the controller: loads decks from disk, sets up table columns, row factory, and button handlers. |
