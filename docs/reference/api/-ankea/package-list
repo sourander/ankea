@@ -16,6 +16,7 @@ $dokka.location:fi.jyu.ohj2.sourander.ankea.controller/MainController/initialize
 $dokka.location:fi.jyu.ohj2.sourander.ankea.controller/PracticeModeController///PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.controller/-practice-mode-controller/index.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.controller/PracticeModeController/PracticeModeController/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.controller/-practice-mode-controller/-practice-mode-controller.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.controller/PracticeModeController/initialize/#java.net.URL#java.util.ResourceBundle/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.controller/-practice-mode-controller/initialize.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.controller/PracticeModeController/setDeck/#fi.jyu.ohj2.sourander.ankea.model.Deck/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.controller/-practice-mode-controller/set-deck.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model////PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/index.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck///PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/index.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/DEFAULT_HEADER/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/-d-e-f-a-u-l-t_-h-e-a-d-e-r.md
