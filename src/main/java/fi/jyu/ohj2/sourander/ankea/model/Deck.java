@@ -219,6 +219,19 @@ public class Deck {
         return getFlashcards().size();
     }
 
+    private void shuffle() {
+        FXCollections.shuffle(getFlashcards());
+    }
+
+    //** Returns a copy of the Deck, but shuffled */
+    public Deck shuffledCopy() {
+            Deck copy = new Deck(getHeader(), getDescription());
+            copy.setPracticeCount(getPracticeCount());
+            copy.setFlashcards(FXCollections.observableArrayList(getFlashcards()));
+            copy.shuffle();
+            return copy;
+    }
+
     @Override
     public String toString() {
         return getHeader();

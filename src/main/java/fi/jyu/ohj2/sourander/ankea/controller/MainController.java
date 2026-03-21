@@ -135,9 +135,15 @@ public class MainController implements Initializable {
         deleteCardButton.setOnAction(event -> deleteCard());
 
         // TAB THREE: Practice
-        startPracticeButton.disableProperty().bind(
-            decksTable.getSelectionModel().selectedItemProperty().isNull()
-        );
+        startPracticeButton.setDisable(true);
+        decksTable.getSelectionModel().selectedItemProperty().addListener((obs, oldDeck, newDeck) -> {
+            startPracticeButton.disableProperty().unbind();
+            if (newDeck == null) {
+                startPracticeButton.setDisable(true);
+            } else {
+                startPracticeButton.disableProperty().bind(newDeck.flashcardsProperty().emptyProperty());
+            }
+        });
         startExamButton.setDisable(true);
         startPracticeButton.setOnAction(event -> startPractice());
         startExamButton.setOnAction(event -> startExam());
@@ -343,12 +349,15 @@ public class MainController implements Initializable {
         }
     }
 
-    /** Deletes the card that is selected. */
+    /** Starts a practice session for the currently selected deck */
     private void startPractice() {
         if (decksTable.getSelectionModel().getSelectedItem() == null) return;
         Deck selectedDeck = decksTable.getSelectionModel().getSelectedItem();
         System.out.println("Starting practice session for deck: " + selectedDeck);
         openPracticeModeWindow(selectedDeck);
+
+        // The view count might have been updated, so we need to persist the decks again
+        repository.saveAll(model.getDecks());
     }
 
     private void startExam() {

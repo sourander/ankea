@@ -3,8 +3,12 @@ package fi.jyu.ohj2.sourander.ankea.model;
 import javafx.collections.FXCollections;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Method;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -93,5 +97,57 @@ class DeckTest {
         deck.incrementPracticeCount();
 
         assertEquals(2, deck.getPracticeCount());
+    }
+
+    /**
+     * Verifies shuffled copy keeps metadata and cards while creating a new instance.
+     */
+    @Test
+    void shuffledCopyCreatesIndependentDeckWithSameCards() {
+        Deck deck = new Deck("French", "Basics");
+        deck.setPracticeCount(3);
+
+        Flashcard one = new Flashcard("bonjour", "hello");
+        Flashcard two = new Flashcard("chat", "cat");
+        Flashcard three = new Flashcard("chien", "dog");
+
+        deck.addFlashcard(one);
+        deck.addFlashcard(two);
+        deck.addFlashcard(three);
+
+        Deck copy = deck.shuffledCopy();
+
+        assertNotSame(deck, copy);
+        assertEquals(deck.getHeader(), copy.getHeader());
+        assertEquals(deck.getDescription(), copy.getDescription());
+        assertEquals(deck.getPracticeCount(), copy.getPracticeCount());
+        assertEquals(deck.getFlashcardCount(), copy.getFlashcardCount());
+        assertTrue(copy.getFlashcards().containsAll(deck.getFlashcards()));
+    }
+
+    /**
+     * Verifies private shuffle mutates the existing list in-place.
+     */
+    @Test
+    void shuffleMutatesExistingListInPlace() throws Exception {
+        Deck deck = new Deck("Biology");
+        Flashcard one = new Flashcard("Cell", "Basic unit of life");
+        Flashcard two = new Flashcard("Atom", "Basic unit of matter");
+        Flashcard three = new Flashcard("Molecule", "Two or more atoms bonded");
+
+        deck.addFlashcard(one);
+        deck.addFlashcard(two);
+        deck.addFlashcard(three);
+
+        var originalListReference = deck.getFlashcards();
+        Method shuffleMethod = Deck.class.getDeclaredMethod("shuffle");
+        shuffleMethod.setAccessible(true);
+        shuffleMethod.invoke(deck);
+
+        assertSame(originalListReference, deck.getFlashcards());
+        assertEquals(3, deck.getFlashcardCount());
+        assertTrue(deck.getFlashcards().contains(one));
+        assertTrue(deck.getFlashcards().contains(two));
+        assertTrue(deck.getFlashcards().contains(three));
     }
 }

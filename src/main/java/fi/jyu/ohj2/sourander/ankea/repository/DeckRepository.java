@@ -83,6 +83,7 @@ public class DeckRepository {
                 Files.createDirectories(parent);
             }
             objectMapper.writeValue(filePath.toFile(), deckDataList);
+            System.out.println("Decks saved successfully to " + filePath);
         } catch (IOException | RuntimeException e) {
             System.err.println("Failed to save decks: " + e.getMessage());
         }
