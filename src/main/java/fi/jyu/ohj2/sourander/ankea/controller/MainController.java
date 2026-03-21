@@ -11,12 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -64,6 +59,12 @@ public class MainController implements Initializable {
 
     @FXML
     private Button deleteCardButton;
+
+    @FXML
+    private Button startPracticeButton;
+
+    @FXML
+    private Button startExamButton;
 
     private static final String NO_DECK_SELECTED_MSG =
             "No Deck selected. Navigate to Decks tab to select or create one.";
@@ -132,6 +133,14 @@ public class MainController implements Initializable {
         addCardButton.setOnAction(event -> addCard());
         editCardButton.setOnAction(event -> editCard(cardsTable.getSelectionModel().getSelectedItem()));
         deleteCardButton.setOnAction(event -> deleteCard());
+
+        // TAB THREE: Practice
+        startPracticeButton.disableProperty().bind(
+            decksTable.getSelectionModel().selectedItemProperty().isNull()
+        );
+        startExamButton.setDisable(true);
+        startPracticeButton.setOnAction(event -> startPractice());
+        startExamButton.setOnAction(event -> startExam());
     }
 
     /** Configures the columns of {@code decksTable} and binds the description column width. */
@@ -312,5 +321,38 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void openPracticeModeWindow(Deck deck) {
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("practice-mode.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+            PracticeModeController controller = loader.getController();
+            controller.setDeck(deck);
+            Stage dialogi = new Stage();
+            dialogi.setScene(scene);
+            dialogi.setTitle("Practice mode: " + deck.getHeader());
+            dialogi.setMinWidth(400);
+            dialogi.setMinHeight(300);
+            dialogi.initModality(Modality.APPLICATION_MODAL);
+            dialogi.showAndWait();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /** Deletes the card that is selected. */
+    private void startPractice() {
+        if (decksTable.getSelectionModel().getSelectedItem() == null) return;
+        Deck selectedDeck = decksTable.getSelectionModel().getSelectedItem();
+        System.out.println("Starting practice session for deck: " + selectedDeck);
+        openPracticeModeWindow(selectedDeck);
+    }
+
+    private void startExam() {
+        if (decksTable.getSelectionModel().getSelectedItem() == null) return;
+        System.out.println("Starting exam session for deck: " + decksTable.getSelectionModel().getSelectedItem());
     }
 }
