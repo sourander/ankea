@@ -35,12 +35,12 @@ public class PracticeModeController implements Initializable {
     private Button nextButton;
 
     private Deck deck;
-    private Deck shuffledDeck; // This will hold the shuffled cards for practice
 
     private final BooleanProperty backRevealed = new SimpleBooleanProperty(false);
     private String currentBackText = "";
 
     private final IntegerProperty currentCardIndex = new SimpleIntegerProperty(-1);
+    private final IntegerProperty practiceCardCount = new SimpleIntegerProperty(0);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -50,6 +50,10 @@ public class PracticeModeController implements Initializable {
 
         prevButton.disableProperty().bind(
             currentCardIndex.lessThanOrEqualTo(0)
+        );
+
+        nextButton.disableProperty().bind(
+            currentCardIndex.greaterThanOrEqualTo(practiceCardCount.subtract(1))
         );
 
         currentCardIndex.addListener((observable, oldValue, newValue) -> {
@@ -104,15 +108,15 @@ public class PracticeModeController implements Initializable {
     }
 
     private void practiceNextCard() {
-        if (shuffledDeck != null && currentCardIndex.get() < shuffledDeck.getFlashcards().size() - 1) {
+        if (deck != null && currentCardIndex.get() < practiceCardCount.get() - 1) {
             currentCardIndex.set(currentCardIndex.get() + 1);
         }
     }
 
     private void updateCardDisplay() {
         int index = currentCardIndex.get();
-        if (shuffledDeck != null && index >= 0 && index < shuffledDeck.getFlashcards().size()) {
-            Flashcard current = shuffledDeck.getFlashcards().get(index);
+        if (deck != null && index >= 0 && index < practiceCardCount.get()) {
+            Flashcard current = deck.getPracticeFlashcard(index);
             
             frontTextArea.setText(current.getFront());
             currentBackText = current.getBack();
@@ -123,19 +127,16 @@ public class PracticeModeController implements Initializable {
 
     public void setDeck(Deck deck) {
         this.deck = deck;
-        this.shuffledDeck = deck.shuffledCopy();
+        deck.startPracticeSession();
+        practiceCardCount.set(deck.getPracticeCardCount());
 
-        if (!shuffledDeck.getFlashcards().isEmpty()) {
-            // 3. Update the binding now that we know the deck size
-            nextButton.disableProperty().bind(
-                currentCardIndex.greaterThanOrEqualTo(shuffledDeck.getFlashcards().size() - 1)
-            );
+        if (practiceCardCount.get() > 0) {
             currentCardIndex.set(0); 
-            updateCardDisplay();
         } else {
+            currentCardIndex.set(-1);
             frontTextArea.setText("No flashcards in this deck.");
-            prevButton.setDisable(true);
-            nextButton.setDisable(true);
+            currentBackText = "";
+            backRevealed.set(false);
         }
     }
 
@@ -143,7 +144,6 @@ public class PracticeModeController implements Initializable {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
 
-        // Update the original deck's practice count
-        deck.setPracticeCount(deck.getPracticeCount() + 1);
+        deck.incrementPracticeCount();
     }
 }

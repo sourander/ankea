@@ -22,8 +22,8 @@ The Game Stats and Exam Mode features are not required for the project, but are 
 
 #### Game Stats
 
-* `ER-1`: Add a view count for each card. Each time the user reveals a card's explanation in practice mode, the card's view count increases by one.
-* `ER-2`: Card view counts are shown in the card table in the deck edit view.
+* `ER-1`: ✅ Add a view count for each card. Each time the user reveals a card's explanation in practice mode, the card's view count increases by one.
+* `ER-2`: ✅ Card view counts are shown in the card table in the deck edit view.
 * `ER-3`: ✅ Add a practice count for each deck. Each time the user opens practice mode and practices every card in the deck once, the deck's practice count increases by one.
 * `ER-4`: ✅ Deck practice counts are shown in the main view as a separate column.
 

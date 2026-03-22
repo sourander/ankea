@@ -9,6 +9,9 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -32,8 +35,11 @@ public class Deck {
     /** Tracks how many full practice rounds have been completed for the deck. */
     private final IntegerProperty practiceCount = new SimpleIntegerProperty(0);
 
+    /** A shuffled order used during a practice session. */
+    private final List<Integer> practiceOrder = new ArrayList<>();
+
     /**
-     * Creates an empty deck. Not used, but JavaFX requires this 
+     * Creates an empty deck.
      */
     public Deck() {
         setHeader(DEFAULT_HEADER);
@@ -222,19 +228,44 @@ public class Deck {
         return getFlashcards().size();
     }
 
-    private void shuffle() {
-        FXCollections.shuffle(getFlashcards());
+    /**
+     * Starts a new practice session by shuffling the display order of the cards.
+     */
+    public void startPracticeSession() {
+        practiceOrder.clear();
+
+        for (int index = 0; index < getFlashcardCount(); index++) {
+            practiceOrder.add(index);
+        }
+
+        Collections.shuffle(practiceOrder);
     }
 
-    //** Returns a copy of the Deck, but shuffled */
-    public Deck shuffledCopy() {
-            Deck copy = new Deck(getHeader(), getDescription());
-            copy.setPracticeCount(getPracticeCount());
-            copy.setFlashcards(FXCollections.observableArrayList(getFlashcards()));
-            copy.shuffle();
-            return copy;
+    /**
+     * Returns the number of cards available in the current practice session.
+     *
+     * @return the number of cards in the current practice order
+     */
+    public int getPracticeCardCount() {
+        return practiceOrder.size();
     }
 
+    /**
+     * Returns the flashcard shown at the given practice-session position.
+     *
+     * @param practiceIndex the index within the current practice session
+     * @return the flashcard at that shuffled position
+     */
+    public Flashcard getPracticeFlashcard(int practiceIndex) {
+        if (practiceIndex < 0 || practiceIndex >= practiceOrder.size()) {
+            throw new IndexOutOfBoundsException("practiceIndex out of bounds: " + practiceIndex);
+        }
+
+        Flashcard flashcard = getFlashcards().get(practiceOrder.get(practiceIndex));
+        flashcard.incrementViewCount();
+
+        return flashcard;
+    }
     @Override
     public String toString() {
         return getHeader();
