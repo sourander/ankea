@@ -31,7 +31,9 @@ Represents a flashcard deck with metadata, cards, and practice statistics.
 | [getFlashcardCount](get-flashcard-count.md) | [JVM]<br>open fun [getFlashcardCount](get-flashcard-count.md)(): [Int](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html)<br>Returns the number of flashcards in the deck. |
 | [getFlashcards](get-flashcards.md) | [JVM]<br>open fun [getFlashcards](get-flashcards.md)(): ObservableList&lt;Flashcard&gt;<br>Returns the observable list of flashcards. |
 | [getHeader](get-header.md) | [JVM]<br>open fun [getHeader](get-header.md)(): [String](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html)<br>Returns the deck header. |
+| [getPracticeCardCount](get-practice-card-count.md) | [JVM]<br>open fun [getPracticeCardCount](get-practice-card-count.md)(): [Int](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html)<br>Returns the number of cards available in the current practice session. |
 | [getPracticeCount](get-practice-count.md) | [JVM]<br>open fun [getPracticeCount](get-practice-count.md)(): [Int](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html)<br>Returns the practice count. |
+| [getPracticeFlashcard](get-practice-flashcard.md) | [JVM]<br>open fun [getPracticeFlashcard](get-practice-flashcard.md)(practiceIndex: [Int](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html)): [Flashcard](../-flashcard/index.md)<br>Returns the flashcard shown at the given practice-session position. |
 | [headerProperty](header-property.md) | [JVM]<br>open fun [headerProperty](header-property.md)(): StringProperty<br>Returns the deck header property. |
 | [incrementPracticeCount](increment-practice-count.md) | [JVM]<br>open fun [incrementPracticeCount](increment-practice-count.md)()<br>Increments the practice count by one. |
 | [practiceCountProperty](practice-count-property.md) | [JVM]<br>open fun [practiceCountProperty](practice-count-property.md)(): IntegerProperty<br>Returns the practice count property. |
@@ -40,5 +42,5 @@ Represents a flashcard deck with metadata, cards, and practice statistics.
 | [setFlashcards](set-flashcards.md) | [JVM]<br>open fun [setFlashcards](set-flashcards.md)(flashcards: ObservableList&lt;Flashcard&gt;)<br>Replaces the flashcards list content. |
 | [setHeader](set-header.md) | [JVM]<br>open fun [setHeader](set-header.md)(header: [String](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html))<br>Updates the deck header. |
 | [setPracticeCount](set-practice-count.md) | [JVM]<br>open fun [setPracticeCount](set-practice-count.md)(practiceCount: [Int](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html))<br>Updates the practice count. |
-| [shuffledCopy](shuffled-copy.md) | [JVM]<br>open fun [shuffledCopy](shuffled-copy.md)(): [Deck](index.md) |
+| [startPracticeSession](start-practice-session.md) | [JVM]<br>open fun [startPracticeSession](start-practice-session.md)()<br>Starts a new practice session by shuffling the display order of the cards. |
 | [toString](to-string.md) | [JVM]<br>open fun [toString](to-string.md)(): [String](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html) |

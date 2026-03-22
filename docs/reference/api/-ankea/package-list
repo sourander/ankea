@@ -31,7 +31,9 @@ $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/getDescription/#/Pointing
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/getFlashcardCount/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/get-flashcard-count.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/getFlashcards/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/get-flashcards.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/getHeader/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/get-header.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/getPracticeCardCount/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/get-practice-card-count.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/getPracticeCount/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/get-practice-count.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/getPracticeFlashcard/#int/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/get-practice-flashcard.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/headerProperty/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/header-property.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/incrementPracticeCount/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/increment-practice-count.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/practiceCountProperty/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/practice-count-property.md
@@ -40,7 +42,7 @@ $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/setDescription/#java.lang
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/setFlashcards/#ObservableList<Flashcard>/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/set-flashcards.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/setHeader/#java.lang.String/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/set-header.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/setPracticeCount/#int/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/set-practice-count.md
-$dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/shuffledCopy/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/shuffled-copy.md
+$dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/startPracticeSession/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/start-practice-session.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/Deck/toString/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck/to-string.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/DeckManager///PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck-manager/index.md
 $dokka.location:fi.jyu.ohj2.sourander.ankea.model/DeckManager/DeckManager/#/PointingToDeclaration/-ankea/fi.jyu.ohj2.sourander.ankea.model/-deck-manager/-deck-manager.md
