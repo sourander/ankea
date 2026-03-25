@@ -2,7 +2,7 @@
 
 Welcome to the user guide for Ankea! We wish you have a truly Ankea moment with this guide and this app. After this short 1 hour read, you can apply for certification as an Ankea Expert and get a shiny badge to show off on your social media profiles (valid for 1 months, then you have to reapply due to somewhat unstable UI).
 
-This user guide has been written for a version `0.42.0` (codename Memorizing Marvin) of Ankea. This is the one of only version ever created. You can install it by
+This user guide has been written for a version `0.42.0` (codename Memorizing Marvin) of Ankea. You can install it by:
 
 ```bash
 git clone https://github.com/sourander/ankea && cd ankea

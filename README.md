@@ -10,14 +10,7 @@ You can find the docs for this project in the `docs` folder. They are also publi
 
 ## TLDR; I wanna run it
 
-If you do not like reading docs, you can get started by:
-
-
-## Prerequisites
-
-Make sure you have following installed: Java 25, Maven, Just.
-
-Then, run:
+If you do not like reading docs, you can get started easily. Make sure you have following installed: Java 25, Maven, Just. Then, run:
 
 ```bash
 # To run tests
